@@ -19,11 +19,18 @@ jobs:
       run: |
         echo "Loading environment variables from .env file"
         if [ -f .env ]; then
-          export $(grep -v '^#' .env | xargs)
-          echo "PYTHONPATH=${PYTHONPATH}" >> $GITHUB_ENV
-          echo "DATABRICKS_TOKEN=${DATABRICKS_TOKEN}" >> $GITHUB_ENV
-          echo "DATABRICKS_SERVER_HOSTNAME=${DATABRICKS_SERVER_HOSTNAME}" >> $GITHUB_ENV
-          echo "DATABRICKS_HTTP_PATH=${DATABRICKS_HTTP_PATH}" >> $GITHUB_ENV
+          # Read the .env file line by line
+          while IFS= read -r line; do
+            # Remove inline comments (anything after #)
+            line="${line%%#*}"
+            # Check for non-empty lines
+            if [[ ! -z "$line" ]]; then
+              # Export each variable to the environment
+              export "$line"
+              # Add the variable to $GITHUB_ENV for later steps
+              echo "$line" >> $GITHUB_ENV
+            fi
+          done < .env
         else
           echo ".env file not found."
         fi
