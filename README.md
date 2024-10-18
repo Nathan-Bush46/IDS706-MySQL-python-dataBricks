@@ -14,6 +14,8 @@
 
 ## Quick Explanation
 
+* See [`video`](https://www.youtube.com/watch?v=rTuY1ctXtiI) for walkthrough.
+
 * Python files that create, query, and test a databricks table using Python and SQL.
     * [`create table`](src/main_workspace/make_table.py): Creates a basic table from data found ['here'](https://www.kaggle.com/datasets/uom190346a/sleep-health-and-lifestyle-dataset?resource=download)
         * Shows use of some SQL queries
