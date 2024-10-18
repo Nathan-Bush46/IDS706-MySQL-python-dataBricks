@@ -1,6 +1,7 @@
 """
 example simple use of databricks with python and SQL
 """
+
 from dotenv import load_dotenv
 from databricks import sql
 import os
@@ -24,7 +25,7 @@ init_table = """CREATE TABLE IF NOT EXISTS person_nathan (PersonID INT,
 
 
 def load(data="src/main_workspace/data/Sleep_health_and_lifestyle_dataset.csv"):
-    payload = csv.reader(open(data, newline="",encoding='utf-8'), delimiter=",")
+    payload = csv.reader(open(data, newline="", encoding="utf-8"), delimiter=",")
     next(payload)  # skip header
     load_dotenv()
     with sql.connect(
@@ -57,5 +58,7 @@ def load(data="src/main_workspace/data/Sleep_health_and_lifestyle_dataset.csv"):
             cursor.close()
             connection.close()
             return 0  # all good
+
+
 if __name__ == "__main__":
     load()

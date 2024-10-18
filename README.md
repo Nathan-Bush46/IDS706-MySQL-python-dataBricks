@@ -13,13 +13,11 @@
 
 ## Quick Explanation
 
-* 3 Python files that create, test, and log a Python database.
-    * [`create database`](src/main_workspace/sql_main.py): Creates a basic database using SQLite3 and Python
-        * Performs basic CRUD operations
-        * Shows examples of different SQL queries
-    * [`log database`](src/main_workspace/sql_logging_example.py): Creates a basic database logger using SQLite3 and Python
-    * [`Test database`](src/tests/test_sql.py): Creates a basic database tester using SQLite3 and Python. This tests that the operations on a database behave as expected. It creates a separate DB in memory for testing.
-* Note: The python script will not delete the old .dp files between runs. Therefore running the python files multiple times will result in duplicate entries in dbs.
+* Python files that create, query, and test a databricks table using Python and SQL.
+    * [`create table`](src/main_workspace/make_table.py): Creates a basic table from data found ['here'](https://www.kaggle.com/datasets/uom190346a/sleep-health-and-lifestyle-dataset?resource=download)
+        * Shows use of some SQL queries
+    * [`query`](src/main_workspace/query.py): Creates a table from the other table. Then joins them to create a more intersting table.
+    * [`Test`](src/tests/tests.py): Does a basic testing using Python. This tests that the operations on a database behave as expected. 
 
 ## Set up instructions using VS code + Docker: 
 ### Docker
@@ -56,7 +54,9 @@ If you choose not to run docker, use a python virtual environment to prevent con
 
 * [`Makefile`](Makefile)
 
-* `Pylint`
+* `Pylint` and `Ruff` for lintning
+
+* `.env`, used to ensure constient imports and give DB info
 
 * `.devcontainer` with [`Dockerfile`](/.devcontainer/Dockerfile), [`postinstall.sh`](/.devcontainer/postinstall.sh), and [`devcontainer.json`](/.devcontainer/devcontainer.json)`
 
