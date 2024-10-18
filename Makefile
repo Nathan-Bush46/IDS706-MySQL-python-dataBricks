@@ -3,7 +3,6 @@ install:
 
 test:
 	find ./src/tests -name "*test*.py" -exec python -m pytest --nbval -v {} +
-	py.test --nbval-lax
 	
 lint:
 	ruff check

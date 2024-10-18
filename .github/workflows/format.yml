@@ -39,7 +39,7 @@ jobs:
     - name: install requirements
       run: |
         make install
-    - name: run test
+    - name: run format
       run: |
         make format
     - run: echo "🍏 This job's status is ${{ job.status }}."
