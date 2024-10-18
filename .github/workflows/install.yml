@@ -14,14 +14,19 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-    - name: Set up .env file
+      # Load environment variables from .env file
+    - name: Load environment variables from .env
       run: |
         echo "Loading environment variables from .env file"
         if [ -f .env ]; then
           export $(grep -v '^#' .env | xargs)
+          echo "PYTHONPATH=${PYTHONPATH}" >> $GITHUB_ENV
+          echo "DATABRICKS_TOKEN=${DATABRICKS_TOKEN}" >> $GITHUB_ENV
+          echo "DATABRICKS_SERVER_HOSTNAME=${DATABRICKS_SERVER_HOSTNAME}" >> $GITHUB_ENV
+          echo "DATABRICKS_HTTP_PATH=${DATABRICKS_HTTP_PATH}" >> $GITHUB_ENV
         else
           echo ".env file not found."
-        fi     
+        fi
     - name: Build the Docker image
       run: docker build . --file .devcontainer/Dockerfile --tag my-image-name:$(date +%s)
     - name: install requirements
